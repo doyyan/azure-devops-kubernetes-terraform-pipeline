@@ -11,7 +11,6 @@ pool:
 
 jobs:
 -job: Job1
-container:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
