@@ -17,6 +17,8 @@ stages:
     - job: FirstJob
       steps:
       - bash: echo Build First Job $(PIPELINELEVELVARIABLE)
+      - bash: echo $(System.DefaultWorkingDirectory)
+      - bash: echo $(Build.ArtifactStagingDirectory)
   - stage: Deploy
     jobs:
     - job: FirstJob
