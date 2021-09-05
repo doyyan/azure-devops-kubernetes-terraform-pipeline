@@ -1,0 +1,27 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azue/kubernetes'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret)'
+    backendType: 'azurerm'
+    backendServiceArm: 'Azure subscription 1(53a39edb-d066-4e6a-a4a7-5580cec2583c)'
+    backendAzureRmResourceGroupName: 'terraform-backend-rg'
+    backendAzureRmStorageAccountName: 'rddoyyanhotmail'
+    backendAzureRmContainerName: 'rddoyyanhotmail'
+    backendAzureRmKey: 'kubernetes-dev.tfstate'
+    allowTelemetryCollection: true
